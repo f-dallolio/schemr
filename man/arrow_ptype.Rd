@@ -15,3 +15,6 @@ An S3 vector of class \code{arrow_ptypes}.
 \description{
 This creates a vector of calls that prints anc can be manipulate as a normal S3 vector.
 }
+\examples{
+arrow_ptype(int32, decimal(1,1))
+}

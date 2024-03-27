@@ -14,6 +14,7 @@ methods::setOldClass(c("arrow_ptype", "vctrs_vctr"))
 #' @return An S3 vector of class `arrow_ptypes`.
 #'
 #' @export
+#' @examples
 #' arrow_ptype(int32, decimal(1,1))
 arrow_ptype <- function(...){
   x <- vcall(..., ns = "arrow")

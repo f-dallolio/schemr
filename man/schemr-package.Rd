@@ -7,6 +7,14 @@
 \description{
 What the package does (one paragraph).
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/f-dallolio/schemr}
+  \item Report bugs at \url{https://github.com/f-dallolio/schemr/issues}
+}
+
+}
 \author{
 \strong{Maintainer}: Filippo DallOlio \email{fdallolio@brocku.ca}
 
