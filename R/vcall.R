@@ -20,7 +20,6 @@ new_vcall <- function(x = list(), env = NULL) {
   vctrs::new_rcrd(fields = fields, env = env, class = "vcall")
 }
 
-
 # for compatibility with the S4 system
 methods::setOldClass(c("vcall", "vctrs_vctr"))
 
