@@ -20,3 +20,5 @@ Imports:
     vctrs
 Depends: 
     arrow
+URL: https://github.com/f-dallolio/schemr
+BugReports: https://github.com/f-dallolio/schemr/issues
