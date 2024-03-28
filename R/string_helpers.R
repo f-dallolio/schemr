@@ -7,11 +7,11 @@
 #'
 #' @examples
 #' str_numpad(1:15)
-str_numpad <- function(x){
+str_numpad <- function(x, pad = "0"){
   check_numeric(x)
   x <- as.character(x)
   nmax <- max(stringr::str_width(x))
-  stringr::str_pad(x, width = nmax, side = "left", pad = "0", use_width = TRUE)
+  stringr::str_pad(x, width = nmax, side = "left", pad = pad, use_width = TRUE)
 }
 #' @export
 str_oxford <- function(x){
@@ -28,16 +28,10 @@ str_oxford <- function(x){
   }
 }
 
-## ----------
-#' Vector of integer characters padded with `V`
-#'
-#' @param x a vector.
-#'
-#' @return a character vector of numbers padded left with 'V' or 'V0'.
-#' @export
-#'
-#' @examples
-#' v_names(letters)
-v_names <- function(x){
+v_names <- function (x) {
   paste0("V", str_numpad(seq_len(vec_size(x))))
+}
+
+str_names <- function (x) {
+  paste0("x", str_numpad(seq_len(length(x)), pad = "_"))
 }
