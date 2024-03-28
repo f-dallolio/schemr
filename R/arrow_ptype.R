@@ -187,7 +187,7 @@ rich_print <- function(x = arrow_ptype(), width = 20){
   tbl <- attr(x, "tbl")
   if(is.null(tbl)){ tbl <- "..." }
 
-  cli::cli_h1(paste0("Table:   ", tbl))
+  cli::cli_h1(paste0("Table:   ", tbl, "   "))
   cat(body, sep = "\n")
   if(!is.null(full_args)){
     cli::cat_rule()
