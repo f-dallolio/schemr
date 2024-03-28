@@ -4,7 +4,7 @@
 \alias{str_numpad}
 \title{Pad number strings}
 \usage{
-str_numpad(x)
+str_numpad(x, pad = "0")
 }
 \arguments{
 \item{x}{a numeric vector.}

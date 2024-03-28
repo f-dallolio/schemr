@@ -44,6 +44,44 @@ format.arrow_ptype <- function(x){
   out <- gsub('\"',"\'",out)
   setNames(out, nms)
 }
+
+## Print ---------
+rich_print <- function(x = arrow_ptype(), width = 20){
+  x_df <- sapply(as.data.frame(x), function(x) paste0("<", vec_ptype_abbr(x), ">"))
+  x_arw <- format(x)
+  n_df <- max(str_width(x_df))
+  n_arw <- max(str_width(x_arw))
+
+  nms0 <- stringr::str_trunc(names(x), width = width, side = "right")
+  n_nms0 <- max(nchar(nms0)) + 1
+  nms <- stringr::str_pad(paste0(nms0, " "), n_nms0, side = "right", pad = "-")
+  # rws <- str_numpad(seq_along(nms))
+  rws <- seq_along(nms)
+  n_rws <- max(nchar(rws))
+
+  body <- sprintf(glue::glue("%{n_rws}.0f - %-s--- %-{n_df}s | %{-n_arw}s"),
+                  rws, nms, x_df, x_arw)
+  full_args <- full_args(x)
+  cli::cli_h1(paste0("Table: ", tbl))
+  cli::cat_line()
+  cat(body, sep = "\n")
+  if(!is.null(full_args)){
+    cli::cat_rule()
+    cli::cat_line(full_args(x))
+  }
+}
+full_args <- function(x){
+  xx <- calls_nms(field(vcall(!!!format(x)), "call"))
+  xx0 <- unique(xx)
+  xx1 <- lapply(xx0, function(x) rlang:::fn_fmls_names(get(x)))
+  xxx <- purrr::compact(setNames(xx1, xx0))
+  if(!is_empty(xxx)){
+    out <- paste0(names(xxx), "[",paste(sQuote(unlist(xxx)), collapse = ","), "]")
+    out <- gsub('\"', "\'", out)
+    return(out)
+  }
+  NULL
+}
 #' @export
 obj_print_header.arrow_ptype <- function(x){
   pt_full <- paste0("<", vec_ptype_full(x), "[", vec_size(x), "]>")
