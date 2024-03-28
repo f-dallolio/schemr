@@ -18,6 +18,16 @@ as_types_list.default <- function(x, .fn = NULL, ...){
 }
 #' @rdname as_types_list
 #' @export
+as_types_list.arrow_ptype <- function(x, .fn = NULL, ...){
+  x0 <- field(x, "types")
+  nms <- stringr::str_squish(names(x))
+  if ( !is.null(.fn) ) {
+    nms <- rlang::as_function(.fn)(nms)
+  }
+  setNames(x0, nms)
+}
+#' @rdname as_types_list
+#' @export
 as_types_list.Schema <- function(x, .fn = NULL, ...){
   x0 <- as.list(x)
   nms <- stringr::str_squish(names(x))
@@ -66,3 +76,22 @@ as_types_list.StructArray <- function(x, .fn = NULL, ...){
   }
   lapply(setNames(x0, nms), arrow::as_data_type)
 }
+
+
+
+#
+#
+#
+# schema(mtcars)
+# as_types_call <- function(x){
+#   x0 <- field(x, "types")
+#   f <-
+#   lapply(x0, f)
+# }
+# x <- as_arrow_ptype(mtcars)
+# function(x) {
+#   gsub('\"',"\'",format(x))
+#
+#   paste0(xlst[[12]][[1]], "(", paste(xlst[[12]][[2]], collapse = ",") , ")")
+#   paste(xlst)
+# }

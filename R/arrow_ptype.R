@@ -1,5 +1,6 @@
-new_arrow_ptype <- function(x = list()){
-  vctrs::new_rcrd(fields = list(types = x), class = "arrow_ptype")
+new_arrow_ptype <- function(x = list(), tbl_name = NULL){
+  if(!is.null(tbl_name)) {assertthat::assert_that(is.character(tbl_name))}
+  vctrs::new_rcrd(fields = list(types = x), tbl = tbl_name, class = "arrow_ptype")
 }
 ## for compatibility with the S4 system
 methods::setOldClass(c("arrow_ptype", "vctrs_vctr"))
@@ -16,14 +17,14 @@ methods::setOldClass(c("arrow_ptype", "vctrs_vctr"))
 #' @export
 #' @examples
 #' arrow_ptype(int32, decimal(1,1))
-arrow_ptype <- function(...){
+arrow_ptype <- function(..., tbl_name = NULL){
   x <- vcall(..., ns = "arrow")
   check_arrow_fn(x)
   nms0_id <- which(names(x) == "")
   v_nms <- v_names(x)
   names(x)[nms0_id] <- v_nms[nms0_id]
   out <- eval_call(x)
-  new_arrow_ptype(out)
+  new_arrow_ptype(out, tbl_name = tbl_name)
 }
 #' @export
 is_arrow_ptype <- function(x) { inherits(x, "arrow_ptype") }
@@ -40,11 +41,32 @@ format.arrow_ptype <- function(x){
   types <- x0$types
   nms <- names(types)
   out <- vapply(types, function(x) call_text(x$code()), character(1))
+  out <- gsub('\"',"\'",out)
   setNames(out, nms)
+}
+#' @export
+obj_print_header.arrow_ptype <- function(x){
+  pt_full <- paste0("<", vec_ptype_full(x), "[", vec_size(x), "]>")
+  tbl <- attr(x, "tbl")
+  if(is.null(tbl)){
+    cli::cat_line(pt_full)
+  } else {
+    cat_line(pt_full, " [ Table: ", tbl, " ]")
+  }
+  invisible(x)
 }
 #' @export
 obj_print_data.arrow_ptype <- function(x){
   print(format(x), quote = FALSE)
+  invisible(x)
+}
+#' @export
+print.arrow_ptype <- function(x, rich = TRUE){
+  if(rich){
+    rich_print(x)
+  } else {
+    obj_print(x)
+  }
 }
 #'
 ## Coercion ----------
@@ -143,3 +165,45 @@ mutate.arrow_ptype <- function(.data, ..., .before = NULL, .after = NULL){
 }
 
 
+#' @export
+rich_print <- function(x = arrow_ptype(), width = 20){
+
+  # x_df <- sapply(as.data.frame(x), function(x) paste0("<", class(x)[[1]], ">"))
+  x_df <- sapply(as.data.frame(x), function(x) paste0("<", vec_ptype_abbr(x), ">"))
+  x_arw <- format(x)
+  n_df <- max(str_width(x_df))
+  n_arw <- max(str_width(x_arw))
+
+  nms0 <- stringr::str_trunc(names(x), width = width, side = "right")
+  n_nms0 <- max(nchar(nms0)) + 1
+  nms <- stringr::str_pad(paste0(nms0, " "), n_nms0, side = "right", pad = "-")
+  # rws <- str_numpad(seq_along(nms))
+  rws <- seq_along(nms)
+  n_rws <- max(nchar(rws))
+
+  body <- sprintf(glue::glue("%{n_rws}.0f - %-s--- %-{n_df}s | %{-n_arw}s"),
+                  rws, nms, x_df, x_arw)
+  full_args <- full_args(x)
+  tbl <- attr(x, "tbl")
+  if(is.null(tbl)){ tbl <- "..." }
+
+  cli::cli_h1(paste0("Table: ", tbl))
+  cat(body, sep = "\n")
+  if(!is.null(full_args)){
+    cli::cat_rule()
+    cli::cat_line(full_args(x))
+  }
+}
+#' @export
+full_args <- function(x){
+  xx <- calls_nms(field(vcall(!!!format(x)), "call"))
+  xx0 <- unique(xx)
+  xx1 <- lapply(xx0, function(x) rlang:::fn_fmls_names(get(x)))
+  xxx <- purrr::compact(setNames(xx1, xx0))
+  if(!is_empty(xxx)){
+    out <- paste0(names(xxx), "[",paste(sQuote(unlist(xxx)), collapse = ","), "]")
+    out <- gsub('\"', "\'", out)
+    return(out)
+  }
+  NULL
+}

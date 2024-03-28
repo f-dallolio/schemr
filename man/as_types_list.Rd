@@ -3,6 +3,7 @@
 \name{as_types_list}
 \alias{as_types_list}
 \alias{as_types_list.default}
+\alias{as_types_list.arrow_ptype}
 \alias{as_types_list.Schema}
 \alias{as_types_list.data.frame}
 \alias{as_types_list.FileSystemDataset}
@@ -13,6 +14,8 @@
 as_types_list(x, .fn = NULL, ...)
 
 \method{as_types_list}{default}(x, .fn = NULL, ...)
+
+\method{as_types_list}{arrow_ptype}(x, .fn = NULL, ...)
 
 \method{as_types_list}{Schema}(x, .fn = NULL, ...)
 

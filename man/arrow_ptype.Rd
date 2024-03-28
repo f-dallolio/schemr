@@ -4,7 +4,7 @@
 \alias{arrow_ptype}
 \title{\code{arrow_ptype} vector}
 \usage{
-arrow_ptype(...)
+arrow_ptype(..., tbl_name = NULL)
 }
 \arguments{
 \item{...}{expressions to turn into arrow data types.}

@@ -82,16 +82,19 @@ call_text.default <- function(x, unname = TRUE, shrink = TRUE){
   assertthat::assert_that(is_call(x))
   nm <- rlang::call_name(x)
   arg <- lapply(rlang::call_args(x),
-                function(x) if(is.numeric(x)) as.numeric(x) else x)
+                function(x) if(is.numeric(x)) {
+                  as.numeric(x)
+                } else {
+                  sprintf("%s", x)
+                })
   if(unname){
     arg <- unname(arg)
   }
   out <- rlang::expr_text(rlang::call2(nm, !!!arg))
   if(shrink){
-    gsub(" ", "", out)
-  } else {
-    out
+    out <- gsub(" ", "", out)
   }
+  gsub('\"',"\'",out)
 }
 
 #' @rdname calls_helpers
