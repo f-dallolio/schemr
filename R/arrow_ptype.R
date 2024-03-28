@@ -101,7 +101,6 @@ as_tibble.arrow_ptype <- function(x) dplyr::as_tibble(as.data.frame(x))
 #'
 #'
 ## Manipulations ----------
-#'
 #' @export
 select.arrow_ptype <- function(.data, ...){
   x <- vec_cast(.data, list())
