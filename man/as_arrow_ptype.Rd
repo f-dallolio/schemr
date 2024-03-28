@@ -9,17 +9,17 @@
 \alias{as_arrow_ptype.StructArray}
 \title{As arrow ptype}
 \usage{
-as_arrow_ptype(x, .fn = NULL, ...)
+as_arrow_ptype(x, .fn = NULL, tbl = NULL)
 
-\method{as_arrow_ptype}{Schema}(x, .fn = NULL, ...)
+\method{as_arrow_ptype}{Schema}(x, .fn = NULL, tbl = NULL)
 
-\method{as_arrow_ptype}{data.frame}(x, .fn = NULL, ...)
+\method{as_arrow_ptype}{data.frame}(x, .fn = NULL, tbl = NULL)
 
-\method{as_arrow_ptype}{FileSystemDataset}(x, .fn = NULL, ...)
+\method{as_arrow_ptype}{FileSystemDataset}(x, .fn = NULL, tbl = NULL)
 
-\method{as_arrow_ptype}{Table}(x, .fn = NULL, ...)
+\method{as_arrow_ptype}{Table}(x, .fn = NULL, tbl = NULL)
 
-\method{as_arrow_ptype}{StructArray}(x, .fn = NULL, ...)
+\method{as_arrow_ptype}{StructArray}(x, .fn = NULL, tbl = NULL)
 }
 \description{
 As arrow ptype
