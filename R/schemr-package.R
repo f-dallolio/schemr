@@ -9,6 +9,7 @@
 NULL
 
 ## usethis namespace: start
+#' @importFrom arrow infer_schema
 #' @importFrom assertthat assert_that
 #' @importFrom cli cat_line
 #' @importFrom cli cli_abort
