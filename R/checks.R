@@ -5,7 +5,6 @@
 #' @return an error if the condition is not satisfied. The function returns `x` invisibly otherwise.
 #'
 #' @name checks
-#' @export
 NULL
 #'
 #' @examples

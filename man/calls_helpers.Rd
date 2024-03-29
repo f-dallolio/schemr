@@ -29,7 +29,7 @@ call_ns2(calls)
 
 calls_ns(calls)
 
-call_match2(calls, env = parent.env(), ...)
+call_match2(calls, env = rlang::caller_env(), ...)
 
 calls_match(calls, env = parent.env(), ...)
 
