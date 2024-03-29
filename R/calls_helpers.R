@@ -44,14 +44,14 @@ calls_ns <- function(calls) {call_ns2(calls)}
 
 #' @rdname calls_helpers
 #' @export
-call_match2 <- function(calls, env = parent.env(), ...){
+call_match2 <- function(calls, env = rlang::caller_env(), ...){
   if(!is.list(calls)){
     calls = list(calls)
   }
-  check_calls_name_exist(calls, envir = env)
+  check_calls_exist(calls, envir = env)
   fn_nms <- call_name2(calls)
   fns <- lapply(fn_nms, get, envir = env)
-  mapply(rlang::call_match, call = calls, fn = fns, defaults = TRUE)
+  mapply(rlang::call_match, call = calls, fn = fns, dots_expand = TRUE, defaults = TRUE)
 }
 #' @rdname calls_helpers
 #' @export
