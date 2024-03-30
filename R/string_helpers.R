@@ -8,8 +8,11 @@
 #' @examples
 #' str_numpad(1:15)
 str_numpad <- function(x, pad = "0"){
-  check_numeric(x)
-  x <- as.character(x)
+  if(is.numeric(x)) {
+    x <- as.character(x)
+  } else {
+    x <- as.character(seq_along(x))
+  }
   nmax <- max(stringr::str_width(x))
   stringr::str_pad(x, width = nmax, side = "left", pad = pad, use_width = TRUE)
 }

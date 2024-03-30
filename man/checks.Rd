@@ -22,41 +22,81 @@
 \alias{check_vector}
 \title{Vector checks}
 \usage{
-check_call_simple(x)
+check_call_simple(
+  x,
+  ...,
+  arg = rlang::caller_arg(x),
+  call = rlang::caller_env()
+)
 
-check_call(x)
+check_call(x, ..., arg = rlang::caller_arg(x), call = rlang::caller_env())
 
-check_function(x)
+check_function(x, ..., arg = rlang::caller_arg(x), call = rlang::caller_env())
 
-check_lambda_function(x)
+check_lambda_function(
+  x,
+  ...,
+  arg = rlang::caller_arg(x),
+  call = rlang::caller_env()
+)
 
-check_scalar_character(x)
+check_scalar_character(
+  x,
+  ...,
+  arg = rlang::caller_arg(x),
+  call = rlang::caller_env()
+)
 
-check_scalar_double(x)
+check_scalar_double(
+  x,
+  ...,
+  arg = rlang::caller_arg(x),
+  call = rlang::caller_env()
+)
 
-check_scalar_integer(x)
+check_scalar_integer(
+  x,
+  ...,
+  arg = rlang::caller_arg(x),
+  call = rlang::caller_env()
+)
 
-check_scalar_list(x)
+check_scalar_list(
+  x,
+  ...,
+  arg = rlang::caller_arg(x),
+  call = rlang::caller_env()
+)
 
-check_scalar_logical(x)
+check_scalar_logical(
+  x,
+  ...,
+  arg = rlang::caller_arg(x),
+  call = rlang::caller_env()
+)
 
-check_scalar_vector(x)
+check_scalar_vector(
+  x,
+  ...,
+  arg = rlang::caller_arg(x),
+  call = rlang::caller_env()
+)
 
-check_bool(x)
+check_bool(x, ..., arg = rlang::caller_arg(x), call = rlang::caller_env())
 
-check_string(x)
+check_string(x, ..., arg = rlang::caller_arg(x), call = rlang::caller_env())
 
-check_character(x)
+check_character(x, ..., arg = rlang::caller_arg(x), call = rlang::caller_env())
 
-check_double(x)
+check_double(x, ..., arg = rlang::caller_arg(x), call = rlang::caller_env())
 
-check_integer(x)
+check_integer(x, ..., arg = rlang::caller_arg(x), call = rlang::caller_env())
 
-check_list(x)
+check_list(x, ..., arg = rlang::caller_arg(x), call = rlang::caller_env())
 
-check_logical(x)
+check_logical(x, ..., arg = rlang::caller_arg(x), call = rlang::caller_env())
 
-check_vector(x)
+check_vector(x, ..., arg = rlang::caller_arg(x), call = rlang::caller_env())
 }
 \arguments{
 \item{x}{input object.}

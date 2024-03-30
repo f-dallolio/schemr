@@ -3,14 +3,14 @@
 \name{quos_helpers}
 \alias{quos_helpers}
 \alias{quos_get_expr}
-\alias{quox_set_expr}
+\alias{quos_set_expr}
 \alias{quos_get_env}
 \alias{quos_set_env}
 \title{Get/set quosures expressions and environments}
 \usage{
 quos_get_expr(x)
 
-quox_set_expr(x, exprs)
+quos_set_expr(x, exprs)
 
 quos_get_env(x)
 
