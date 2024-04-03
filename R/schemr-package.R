@@ -51,6 +51,7 @@ NULL
 #' @importFrom rlang sym
 #' @importFrom rlang syms
 #' @importFrom stringr str_width
+#' @importFrom tibble as_tibble
 #' @importFrom vctrs df_list
 ## usethis namespace: end
 NULL
