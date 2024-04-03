@@ -19,7 +19,7 @@ multi_cnd <- function(x, ...){
     if(fml_flag) {
       fn_out <- rlang::as_function(rlang::eval_tidy(fn2[[i]]))(x)
       if(isFALSE(fn_out)){
-        fn_text <- f_text(rlang::eval_tidy(fn2[[i]]))
+        fn_text <- rlang::f_text(rlang::eval_tidy(fn2[[i]]))
         fn_text <- gsub(".x", arg, fn_text)
         fn_call <- rlang::call2("validate_that", str2lang(fn_text), .ns = "assertthat")
         fn_out <- eval(fn_call)
@@ -114,6 +114,19 @@ obj_print_data.multi_cnd <- function(x){
 }
 #' @export
 #' @rdname multi_cnd
+vec_math.multi_cnd <- function(.fn, x, ...) {
+  switch (.fn,
+          all = all(vctrs::field(x, "out")),
+          any = any(vctrs::field(x, "out")),
+          and_c = all(vctrs::field(x, "out")),
+          or_c = any(vctrs::field(x, "out")),
+          vec_math_base(.fn, x, ...)
+  )
+}
+
+
+#' @export
+#' @rdname multi_cnd
 and_c <- function(x, ...) {
   UseMethod("and_c")
 }
@@ -166,14 +179,4 @@ or_c.multi_cnd <- function(x, ..., verbose = TRUE){
   }
   invisible(out)
 }
-#' @export
-#' @rdname multi_cnd
-vec_math.multi_cnd <- function(.fn, x, ...) {
-  switch (.fn,
-    all = all(vctrs::field(x, "out")),
-    any = any(vctrs::field(x, "out")),
-    and_c = all(vctrs::field(x, "out")),
-    or_c = any(vctrs::field(x, "out")),
-    vec_math_base(.fn, x, ...)
-  )
-}
+

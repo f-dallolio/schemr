@@ -48,5 +48,15 @@ as_arrow_ptype.StructArray <- function(x, .fn = NULL, tbl_name = NULL){
   x <- lapply(as_types_list(x0, .fn = .fn), f)
   arrow_ptype(!!!x, tbl_name = tbl_name)
 }
-
+#' @rdname as_arrow_ptype
+#' @export
+as_arrow_ptype.character <- function(x, tbl_name = NULL){
+  x <- as.list(x, use.names = TRUE)
+  arrow_ptype(!!!x, tbl_name = tbl_name)
+}
+#' @rdname as_arrow_ptype
+#' @export
+as_arrow_ptype.list <- function(x, tbl_name = NULL){
+  arrow_ptype(!!!x, tbl_name = tbl_name)
+}
 
