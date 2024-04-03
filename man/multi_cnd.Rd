@@ -9,13 +9,13 @@
 \alias{format.multi_cnd}
 \alias{obj_print_header.multi_cnd}
 \alias{obj_print_data.multi_cnd}
+\alias{vec_math.multi_cnd}
 \alias{and_c}
 \alias{and_c.default}
 \alias{and_c.multi_cnd}
 \alias{or_c}
 \alias{or_c.default}
 \alias{or_c.multi_cnd}
-\alias{vec_math.multi_cnd}
 \title{\code{multi_cnd} vector}
 \usage{
 multi_cnd(x, ...)
@@ -34,6 +34,8 @@ multi_cnd(x, ...)
 
 \method{obj_print_data}{multi_cnd}(x)
 
+\method{vec_math}{multi_cnd}(.fn, x, ...)
+
 and_c(x, ...)
 
 \method{and_c}{default}(...)
@@ -45,8 +47,6 @@ or_c(x, ...)
 \method{or_c}{default}(...)
 
 \method{or_c}{multi_cnd}(x, ..., verbose = TRUE)
-
-\method{vec_math}{multi_cnd}(.fn, x, ...)
 }
 \arguments{
 \item{x}{a vector.}

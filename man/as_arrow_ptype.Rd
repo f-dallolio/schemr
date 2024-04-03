@@ -7,6 +7,8 @@
 \alias{as_arrow_ptype.FileSystemDataset}
 \alias{as_arrow_ptype.Table}
 \alias{as_arrow_ptype.StructArray}
+\alias{as_arrow_ptype.character}
+\alias{as_arrow_ptype.list}
 \title{As arrow ptype}
 \usage{
 as_arrow_ptype(x, .fn = NULL, tbl_name = NULL)
@@ -20,6 +22,10 @@ as_arrow_ptype(x, .fn = NULL, tbl_name = NULL)
 \method{as_arrow_ptype}{Table}(x, .fn = NULL, tbl_name = NULL)
 
 \method{as_arrow_ptype}{StructArray}(x, .fn = NULL, tbl_name = NULL)
+
+\method{as_arrow_ptype}{character}(x, tbl_name = NULL)
+
+\method{as_arrow_ptype}{list}(x, tbl_name = NULL)
 }
 \description{
 As arrow ptype
