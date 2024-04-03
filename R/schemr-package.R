@@ -14,6 +14,10 @@ NULL
 #' @importFrom cli cat_line
 #' @importFrom cli cli_abort
 #' @importFrom cli cli_text
+#' @importFrom dplyr mutate
+#' @importFrom dplyr relocate
+#' @importFrom dplyr rename
+#' @importFrom dplyr select
 #' @importFrom rlang as_label
 #' @importFrom rlang as_name
 #' @importFrom rlang as_quosure
