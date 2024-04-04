@@ -21,6 +21,7 @@ Imports:
     tibble,
     vctrs
 Depends: 
-    arrow
+    arrow,
+    R (>= 2.10)
 URL: https://github.com/f-dallolio/schemr
 BugReports: https://github.com/f-dallolio/schemr/issues
