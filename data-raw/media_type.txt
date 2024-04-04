@@ -1,0 +1,25 @@
+media_type_id	media_type	occ_file
+1	Network TV	NationalTV.tsv
+4	Spanish Language Network TV	NationalTV.tsv
+2	Cable TV	NationalTV.tsv
+22	Spanish Language Cable TV	NationalTV.tsv
+3	Syndicated TV	NationalTV.tsv
+5	Spot TV	SpotTV.tsv
+13	Network Clearance Spot TV	SpotTV.tsv
+14	Syndicated Clearance Spot TV	SpotTV.tsv
+24	Local/Regional Cable TV	SpotTV.tsv
+7	National Magazine	Magazine.tsv
+8	Local Magazine	Magazine.tsv
+12	FSI Coupon	FSICoupon.tsv
+9	National Newspaper	Newspaper.tsv
+16	National Sunday Supplement	Newspaper.tsv
+10	Local Newspaper	Newspaper.tsv
+15	Local Sunday Supplement	Newspaper.tsv
+6	Network Radio	Radio.tsv
+17	Spot Radio	Radio.tsv
+11	Outdoor	Outdoor.tsv
+25	National Internet	Internet.tsv
+26	Local Internet	Internet.tsv
+27	National Cinema	Cinema.tsv
+28	Regional Cinema	Cinema.tsv
+31	National Digital	Digital.tsv
