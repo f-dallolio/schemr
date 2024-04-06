@@ -91,7 +91,7 @@ obj_as_call <- function(x, ..., .find_ns = TRUE) {
 #'
 #' @rdname objs_to_calls
 #' @export
-objs_as_call <- function(..., .find_ns = TRUE, .named = FALSE){
+objs_as_call <- function(..., .find_ns = TRUE, .named = TRUE){
   x <- enexprs(...)
   nms <- names(x)
   if(all(nms == "")){
