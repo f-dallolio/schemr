@@ -334,7 +334,7 @@ stop_input_type <- function(x,
     obj_type_friendly(x, value = show_value)
   )
 
-  abort(message, ..., call = call, arg = arg)
+  cli::cli_abort(message, ..., call = call, arg = arg)
 }
 
 oxford_comma <- function(chr, sep = ", ", final = "or") {

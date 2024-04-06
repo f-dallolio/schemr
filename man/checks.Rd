@@ -29,9 +29,21 @@ check_call_simple(
   call = rlang::caller_env()
 )
 
-check_call(x, ..., arg = rlang::caller_arg(x), call = rlang::caller_env())
+check_call(
+  x,
+  ...,
+  allow_null = FALSE,
+  arg = caller_arg(x),
+  call = caller_env()
+)
 
-check_function(x, ..., arg = rlang::caller_arg(x), call = rlang::caller_env())
+check_function(
+  x,
+  ...,
+  allow_null = FALSE,
+  arg = caller_arg(x),
+  call = caller_env()
+)
 
 check_lambda_function(
   x,
@@ -82,11 +94,32 @@ check_scalar_vector(
   call = rlang::caller_env()
 )
 
-check_bool(x, ..., arg = rlang::caller_arg(x), call = rlang::caller_env())
+check_bool(
+  x,
+  ...,
+  allow_na = FALSE,
+  allow_null = FALSE,
+  arg = caller_arg(x),
+  call = caller_env()
+)
 
-check_string(x, ..., arg = rlang::caller_arg(x), call = rlang::caller_env())
+check_string(
+  x,
+  ...,
+  allow_empty = TRUE,
+  allow_na = FALSE,
+  allow_null = FALSE,
+  arg = caller_arg(x),
+  call = caller_env()
+)
 
-check_character(x, ..., arg = rlang::caller_arg(x), call = rlang::caller_env())
+check_character(
+  x,
+  ...,
+  allow_null = FALSE,
+  arg = caller_arg(x),
+  call = caller_env()
+)
 
 check_double(x, ..., arg = rlang::caller_arg(x), call = rlang::caller_env())
 
@@ -94,7 +127,13 @@ check_integer(x, ..., arg = rlang::caller_arg(x), call = rlang::caller_env())
 
 check_list(x, ..., arg = rlang::caller_arg(x), call = rlang::caller_env())
 
-check_logical(x, ..., arg = rlang::caller_arg(x), call = rlang::caller_env())
+check_logical(
+  x,
+  ...,
+  allow_null = FALSE,
+  arg = caller_arg(x),
+  call = caller_env()
+)
 
 check_vector(x, ..., arg = rlang::caller_arg(x), call = rlang::caller_env())
 }

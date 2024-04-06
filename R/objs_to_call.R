@@ -54,30 +54,53 @@ check_objs_are_call <- function(...){
 #'
 #' @rdname objs_to_calls
 #' @export
-obj_as_call <- function(x = NULL) {
-  x <- rlang::enexpr(x)
-  if( is.null({{ x }}) ) { return(NULL) }
-  if( rlang::is_string({{ x }}) ){
-    x_str <- str2lang({{ x }})
+obj_as_call <- function(x, ..., .find_ns = TRUE) {
+  x <- enexpr(x)
+  if( is_string(x) ){
+    x_str <- str2lang(x)
+    if( is_call(x_str, c("::", ":::")) ){
+      fn <- quo_text(x_str[[3]])
+      ns <- quo_text(x_str[[2]])
+      x_str <- call2(fn, .ns = ns)
+    }
     if( !rlang::is_call(x_str) ){
-      rlang::call2(x)
+      out <- rlang::call2(x_str)
     } else {
-      x_str
+      out <- x_str
     }
   } else {
-    if( !rlang::is_call({{ x }}) ) {
-      as.call(list({{ x }}))
+    if( is_call(x, c("::", ":::")) ){
+      fn <- quo_text(x[[3]])
+      ns <- quo_text(x[[2]])
+      x <- call2(fn, .ns = ns)
+    }
+    if( is_call_simple(x)){
+      out <- x
     } else {
-      x
+      out <- call2(expr_text(x))
     }
   }
+  if(.find_ns){
+    null_ns <- is.null(call_ns(out))
+    .auto_ns(out)
+  } else {
+    out
+  }
 }
+
 #'
 #' @rdname objs_to_calls
 #' @export
-objs_as_call <- function(...){new
-  exprs <- rlang::enexprs(...)
-  nms <- names(exprs)
-  setNames(lapply(exprs, obj_as_call), nms)
+objs_as_call <- function(..., .find_ns = TRUE, .named = FALSE){
+  x <- enexprs(...)
+  nms <- names(x)
+  if(all(nms == "")){
+    names(x) <- NULL
+  }
+  out <- lapply(x, obj_as_call, .find_ns = .find_ns)
+  if(.named){
+    nms_id <- which(nms == "")
+    nms[nms_id] <- vapply(out[nms_id], call_name, character(1))
+  }
+  setNames(out, nms)
 }
-

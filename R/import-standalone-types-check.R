@@ -299,7 +299,7 @@ check_symbol <- function(x,
 
   stop_input_type(
     x,
-    "a symbol",
+    "a {.cls symbol}",
     ...,
     allow_na = FALSE,
     allow_null = allow_null,
@@ -349,7 +349,7 @@ check_call <- function(x,
 
   stop_input_type(
     x,
-    "a defused call",
+    "a defused {.cls call}",
     ...,
     allow_na = FALSE,
     allow_null = allow_null,
@@ -374,7 +374,7 @@ check_environment <- function(x,
 
   stop_input_type(
     x,
-    "an environment",
+    "an {.cls environment}",
     ...,
     allow_na = FALSE,
     allow_null = allow_null,
@@ -399,7 +399,7 @@ check_function <- function(x,
 
   stop_input_type(
     x,
-    "a function",
+    "a {.cls function}",
     ...,
     allow_na = FALSE,
     allow_null = allow_null,
@@ -424,7 +424,7 @@ check_closure <- function(x,
 
   stop_input_type(
     x,
-    "an R function",
+    "an R {.cls function}",
     ...,
     allow_na = FALSE,
     allow_null = allow_null,
@@ -449,7 +449,7 @@ check_formula <- function(x,
 
   stop_input_type(
     x,
-    "a formula",
+    "a {.cls formula}",
     ...,
     allow_na = FALSE,
     allow_null = allow_null,
@@ -477,7 +477,7 @@ check_character <- function(x,
 
   stop_input_type(
     x,
-    "a character vector",
+    "a {.cls character vector}",
     ...,
     allow_na = FALSE,
     allow_null = allow_null,
@@ -502,7 +502,7 @@ check_logical <- function(x,
 
   stop_input_type(
     x,
-    "a logical vector",
+    "a {.cls logical vector}",
     ...,
     allow_na = FALSE,
     allow_null = allow_null,
@@ -527,7 +527,7 @@ check_data_frame <- function(x,
 
   stop_input_type(
     x,
-    "a data frame",
+    "a {.cls data frame}",
     ...,
     allow_null = allow_null,
     arg = arg,

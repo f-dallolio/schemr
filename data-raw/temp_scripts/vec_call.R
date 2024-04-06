@@ -32,7 +32,7 @@ new_vec_call <- function(x = list()){
 }
 
 is_vec_call <- function(x){
-  rlang::in
+  inherits(x, "vec_call")
 }
 
 names.vec_call <- function(x){
