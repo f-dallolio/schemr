@@ -15,7 +15,7 @@ adintel_path_i <- function(x){
   tbl <- gsub("network_tv", "national_tv", tbl)
   tbl <- gsub("spot_tv", "local_tv", tbl)
   ptypes <- as_arrow_ptype(adintel_ptypes[[tbl]], tbl)
-  tibble::as_tibble(append(as.list(res), list(tbl = tbl, ptyes = list(ptypes))))
+  tibble::as_tibble(append(as.list(res), list(tbl = tbl, ptypes = list(ptypes))))
 }
 #' Split adintel paths
 #'
