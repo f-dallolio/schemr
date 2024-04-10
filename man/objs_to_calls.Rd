@@ -18,9 +18,9 @@ objs_are_call(..., all = TRUE)
 
 check_objs_are_call(...)
 
-obj_as_call(x, ..., .find_ns = TRUE)
+obj_as_call(x)
 
-objs_as_call(..., .find_ns = TRUE, .named = TRUE)
+objs_as_call(..., .named = FALSE)
 }
 \arguments{
 \item{x}{expression or character vector to test as call or transform to call.}

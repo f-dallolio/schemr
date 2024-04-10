@@ -12,15 +12,6 @@ check_quosure(
   call = caller_env()
 )
 }
-\arguments{
-\item{x}{.}
-
-\item{allow_null}{.}
-
-\item{arg}{.}
-
-\item{call}{.}
-}
 \description{
 Check input is a quosure
 }

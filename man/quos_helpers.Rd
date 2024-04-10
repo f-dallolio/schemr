@@ -2,16 +2,25 @@
 % Please edit documentation in R/quos_helpers.R
 \name{quos_helpers}
 \alias{quos_helpers}
+\alias{quos_get_expr}
 \alias{quos_set_expr}
 \alias{quos_get_env}
 \alias{quos_set_env}
+\alias{expr_to_string}
+\alias{quo_to_string}
 \title{Get/set quosures expressions and environments}
 \usage{
+quos_get_expr(x)
+
 quos_set_expr(x, exprs)
 
 quos_get_env(x)
 
 quos_set_env(x, env)
+
+expr_to_string(x)
+
+quo_to_string(x)
 }
 \arguments{
 \item{x}{quosures.}

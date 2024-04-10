@@ -14,7 +14,12 @@
 \alias{calls_set_ns}
 \alias{call_text}
 \alias{call_text.default}
-\alias{call_text.vcall}
+\alias{call_self_match}
+\alias{call_set_name}
+\alias{call_no_ns}
+\alias{call_has_ns}
+\alias{call_expand}
+\alias{call_base}
 \title{Get names/args/ns (and set ns) of calls lists.}
 \usage{
 call_name2(calls)
@@ -33,7 +38,7 @@ call_match2(calls, env = rlang::caller_env(), ...)
 
 calls_match(calls, env = parent.env(), ...)
 
-call_set_ns(x, ns)
+call_set_ns(x, value)
 
 calls_set_ns(calls, ns)
 
@@ -41,7 +46,25 @@ call_text(x, unname = TRUE, shrink = TRUE)
 
 \method{call_text}{default}(x, unname = TRUE, shrink = TRUE)
 
-\method{call_text}{vcall}(x, unname = TRUE, shrink = TRUE)
+call_self_match(
+  call,
+  ...,
+  defaults = !is.null(call_ns(call)),
+  dots_env = NULL,
+  dots_expand = TRUE
+)
+
+call_set_name(x, value)
+
+call_set_ns(x, value)
+
+call_no_ns(x)
+
+call_has_ns(x)
+
+call_expand(...)
+
+call_base(name, ns = NULL)
 }
 \arguments{
 \item{calls}{a list of calls.}

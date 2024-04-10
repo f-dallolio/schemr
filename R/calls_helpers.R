@@ -12,7 +12,11 @@ call_name2 <- function(calls){
   if(!is.list(calls)){
     calls = list(calls)
   }
-  sapply(calls, rlang::call_name)
+  out <- sapply(calls, rlang::call_name)
+  if(all(names(out) == "")){
+    names(out) <- NULL
+  }
+  out
 }
 #' @rdname calls_helpers
 #' @export
@@ -24,7 +28,11 @@ call_args2 <- function(calls){
   if(!is.list(calls)){
     calls = list(calls)
   }
-  vapply(calls, rlang::call_args, list())
+  out <- vapply(calls, rlang::call_args, list())
+  if(all(names(out) == "")){
+    names(out) <- NULL
+  }
+  out
 }
 #' @rdname calls_helpers
 #' @export
@@ -36,7 +44,11 @@ call_ns2 <- function(calls){
   if(!is.list(calls)){
     calls = list(calls)
   }
-  sapply(calls, rlang::call_ns)
+  out <- sapply(calls, rlang::call_ns)
+  if(all(names(out) == "")){
+    names(out) <- NULL
+  }
+  out
 }
 #' @rdname calls_helpers
 #' @export
@@ -75,7 +87,6 @@ calls_set_ns <- function(calls, ns){
 call_text <- function(x, unname = TRUE, shrink = TRUE){
     UseMethod("call_text")
 }
-
 #' @rdname calls_helpers
 #' @export
 call_text.default <- function(x, unname = TRUE, shrink = TRUE){
@@ -99,11 +110,107 @@ call_text.default <- function(x, unname = TRUE, shrink = TRUE){
 
 #' @rdname calls_helpers
 #' @export
-call_text.vcall <- function(x, unname = TRUE, shrink = TRUE){
-  x <- field(x, "call")
-  out <- vapply(x, call_text.default, character(1), unname = unname, shrink = shrink)
-  if( all(names(x) == "")) {
-    names(out) <- NULL
+call_self_match <- function(call, ...,
+                            defaults = !is.null(call_ns(call)),
+                            dots_env = NULL, dots_expand = TRUE){
+  check_call_simple(call)
+  check_dots_empty0(...)
+  nm <- call_name(call)
+  ns <- call_ns(call)
+  if(is.null(ns)){
+    fn_ok <- exists(nm, mode = "function")
+  } else {
+    fn_ok <- exists(nm, envir = asNamespace(ns), mode = "function")
   }
-  out
+
+  if(fn_ok){
+    fn <- get(nm, mode = "function")
+  } else {
+    c_arg <- caller_arg(call)
+    cli::cli_abort("Cannot find the function {.arg {c_arg}}")
+  }
+  rlang::call_match(call = call, fn = fn,
+                    defaults = defaults,
+                    dots_env = dots_env,
+                    dots_expand = dots_expand)
+}
+
+#' @rdname calls_helpers
+#' @export
+call_set_name <- function(x, value){
+  check_call(x)
+  value <- enquo(value)
+  if(quo_is_call(value)){
+    value <- as_quosure(eval_tidy(value))
+  }
+  if (quo_is_symbolic(value)){
+    val <- quo_text(value)
+  } else {
+    val <- quo_get_expr(value)
+  }
+  call2(val, splice(call_args(x)), .ns = call_ns(x))
+}
+#'
+#' @rdname calls_helpers
+#' @export
+call_set_ns <- function(x, value){
+  check_call(x)
+  value <- enquo(value)
+  if(quo_is_call(value)){
+    value <- as_quosure(eval_tidy(value))
+  }
+  if (quo_is_symbolic(value)){
+    val <- quo_text(value)
+  } else {
+    val <- quo_get_expr(value)
+  }
+  call2(call_name(x), splice(call_args(x)), .ns = val)
+}
+#'
+#' @rdname calls_helpers
+#' @export
+call_no_ns <- function(x){
+  check_call_simple(x)
+  is.null(call_ns(x))
+}
+#'
+#' @rdname calls_helpers
+#' @export
+call_has_ns <- function(x){
+  !call_no_ns(x)
+}
+#'
+call_expand_scalar <- function(x){
+  check_call_simple(x)
+  fn <- call_name(x)
+  args <- call_args(x)
+  ns <- call_ns(x)
+  foo <- get0(fn, mode = "function", ifnotfound = NULL)
+  if(call_has_ns(x)){
+    foo <- get0(fn, envir =  asNamespace(ns), mode = "function", ifnotfound = NULL)
+  }
+  if(is.null(ns) && is_function(foo)){
+    ns <- ns_env_name(foo)
+  }
+  call_new <- call2(fn, splice(args), .ns = ns)
+  if(is_function(foo)){
+    call_match(call_new, foo, defaults = TRUE, dots_expand = TRUE)
+  } else {
+    call_new
+  }
+}
+#'
+#' @rdname calls_helpers
+#' @export
+call_expand <- function(...){
+  x <- list2(...)
+  lapply(x, call_expand_scalar)
+}
+#'
+#' @rdname calls_helpers
+#' @export
+call_base <- function(name, ns = NULL){
+  .fn <- expr_to_string(enexpr(name))
+  .ns <- expr_to_string(enexpr(ns))
+  call2(.fn = .fn, .ns = .ns)
 }

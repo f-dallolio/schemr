@@ -31,3 +31,7 @@ NULL
 auto_ns <- function(..., ns_only = FALSE){
   sapply(list2(...), .auto_ns)
 }
+
+add_ns <- function(x, ns){
+
+}

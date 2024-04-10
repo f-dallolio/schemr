@@ -51,56 +51,39 @@ check_objs_are_call <- function(...){
   invisible(exprs)
 }
 
-#'
-#' @rdname objs_to_calls
-#' @export
-obj_as_call <- function(x, ..., .find_ns = TRUE) {
-  x <- enexpr(x)
-  if( is_string(x) ){
-    x_str <- str2lang(x)
-    if( is_call(x_str, c("::", ":::")) ){
-      fn <- quo_text(x_str[[3]])
-      ns <- quo_text(x_str[[2]])
-      x_str <- call2(fn, .ns = ns)
-    }
-    if( !rlang::is_call(x_str) ){
-      out <- rlang::call2(x_str)
-    } else {
-      out <- x_str
-    }
-  } else {
-    if( is_call(x, c("::", ":::")) ){
-      fn <- quo_text(x[[3]])
-      ns <- quo_text(x[[2]])
-      x <- call2(fn, .ns = ns)
-    }
-    if( is_call_simple(x)){
-      out <- x
-    } else {
-      out <- call2(expr_text(x))
-    }
+
+.obj2call <- function(x){
+  # x <- enquo(x)
+  x_expr <- enexpr(x)
+  if(is.character(x_expr)){
+    x_expr <- str2lang(x_expr)
   }
-  if(.find_ns){
-    null_ns <- is.null(call_ns(out))
-    .auto_ns(out)
+  if(rlang::is_call(x_expr)){
+    if(rlang::is_call(x_expr, name = c("::", ":::"))){
+      cll_nm <- as_string(x_expr[[3]])
+      cll_ns <- as_string(x_expr[[2]])
+      return(call2(cll_nm, .ns = cll_ns))
+    } else if (is_call_simple(x_expr)){
+      return(x_expr)
+    } else {
+      cli::cli_abort("Cannot create a call out of {.arg x}")
+    }
   } else {
-    out
+    cll <- as.call(list(x_expr))
+    return(cll)
   }
 }
-
 #'
 #' @rdname objs_to_calls
 #' @export
-objs_as_call <- function(..., .find_ns = TRUE, .named = TRUE){
-  x <- enexprs(...)
-  nms <- names(x)
-  if(all(nms == "")){
-    names(x) <- NULL
-  }
-  out <- lapply(x, obj_as_call, .find_ns = .find_ns)
-  if(.named){
-    nms_id <- which(nms == "")
-    nms[nms_id] <- vapply(out[nms_id], call_name, character(1))
-  }
-  setNames(out, nms)
+obj_as_call <- function(x){
+  .obj2call(!!enexpr(x))
+}
+#'
+#' @rdname objs_to_calls
+#' @export
+objs_as_call <- function(..., .named = FALSE){#, .auto_ns = FALSE){
+  x <- enexprs(..., .named = .named)
+  out <- lapply(x, obj_as_call)
+  out
 }
