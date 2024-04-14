@@ -283,31 +283,6 @@ check_number_whole <- function(x,
   )
 }
 
-check_symbol <- function(x,
-                         ...,
-                         allow_null = FALSE,
-                         arg = caller_arg(x),
-                         call = caller_env()) {
-  if (!missing(x)) {
-    if (is_symbol(x)) {
-      return(invisible(NULL))
-    }
-    if (allow_null && is_null(x)) {
-      return(invisible(NULL))
-    }
-  }
-
-  stop_input_type(
-    x,
-    "a {.cls symbol}",
-    ...,
-    allow_na = FALSE,
-    allow_null = allow_null,
-    arg = arg,
-    call = call
-  )
-}
-
 check_arg <- function(x,
                       ...,
                       allow_null = FALSE,
@@ -333,130 +308,9 @@ check_arg <- function(x,
   )
 }
 
-check_call <- function(x,
-                       ...,
-                       allow_null = FALSE,
-                       arg = caller_arg(x),
-                       call = caller_env()) {
-  if (!missing(x)) {
-    if (is_call(x)) {
-      return(invisible(NULL))
-    }
-    if (allow_null && is_null(x)) {
-      return(invisible(NULL))
-    }
-  }
 
-  stop_input_type(
-    x,
-    "a defused {.cls call}",
-    ...,
-    allow_na = FALSE,
-    allow_null = allow_null,
-    arg = arg,
-    call = call
-  )
-}
 
-check_environment <- function(x,
-                              ...,
-                              allow_null = FALSE,
-                              arg = caller_arg(x),
-                              call = caller_env()) {
-  if (!missing(x)) {
-    if (is_environment(x)) {
-      return(invisible(NULL))
-    }
-    if (allow_null && is_null(x)) {
-      return(invisible(NULL))
-    }
-  }
 
-  stop_input_type(
-    x,
-    "an {.cls environment}",
-    ...,
-    allow_na = FALSE,
-    allow_null = allow_null,
-    arg = arg,
-    call = call
-  )
-}
-
-check_function <- function(x,
-                           ...,
-                           allow_null = FALSE,
-                           arg = caller_arg(x),
-                           call = caller_env()) {
-  if (!missing(x)) {
-    if (is_function(x)) {
-      return(invisible(NULL))
-    }
-    if (allow_null && is_null(x)) {
-      return(invisible(NULL))
-    }
-  }
-
-  stop_input_type(
-    x,
-    "a {.cls function}",
-    ...,
-    allow_na = FALSE,
-    allow_null = allow_null,
-    arg = arg,
-    call = call
-  )
-}
-
-check_closure <- function(x,
-                          ...,
-                          allow_null = FALSE,
-                          arg = caller_arg(x),
-                          call = caller_env()) {
-  if (!missing(x)) {
-    if (is_closure(x)) {
-      return(invisible(NULL))
-    }
-    if (allow_null && is_null(x)) {
-      return(invisible(NULL))
-    }
-  }
-
-  stop_input_type(
-    x,
-    "an R {.cls function}",
-    ...,
-    allow_na = FALSE,
-    allow_null = allow_null,
-    arg = arg,
-    call = call
-  )
-}
-
-check_formula <- function(x,
-                          ...,
-                          allow_null = FALSE,
-                          arg = caller_arg(x),
-                          call = caller_env()) {
-  if (!missing(x)) {
-    if (is_formula(x)) {
-      return(invisible(NULL))
-    }
-    if (allow_null && is_null(x)) {
-      return(invisible(NULL))
-    }
-  }
-
-  stop_input_type(
-    x,
-    "a {.cls formula}",
-    ...,
-    allow_na = FALSE,
-    allow_null = allow_null,
-    arg = arg,
-    call = call
-  )
-}
 
 
 # Vectors -----------------------------------------------------------------

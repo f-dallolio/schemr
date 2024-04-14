@@ -214,3 +214,14 @@ call_base <- function(name, ns = NULL){
   .ns <- expr_to_string(enexpr(ns))
   call2(.fn = .fn, .ns = .ns)
 }
+#'
+#' @rdname calls_helpers
+#' @export
+encall <- function(x) {
+  x <- get_expr(x)
+  if (is_string(x)) {
+    str2lang(x)
+  } else {
+    x
+  }
+}

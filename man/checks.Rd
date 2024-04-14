@@ -29,21 +29,9 @@ check_call_simple(
   call = rlang::caller_env()
 )
 
-check_call(
-  x,
-  ...,
-  allow_null = FALSE,
-  arg = caller_arg(x),
-  call = caller_env()
-)
+check_call(x, ..., arg = rlang::caller_arg(x), call = rlang::caller_env())
 
-check_function(
-  x,
-  ...,
-  allow_null = FALSE,
-  arg = caller_arg(x),
-  call = caller_env()
-)
+check_function(x, ..., arg = rlang::caller_arg(x), call = rlang::caller_env())
 
 check_lambda_function(
   x,

@@ -20,6 +20,7 @@
 \alias{call_has_ns}
 \alias{call_expand}
 \alias{call_base}
+\alias{encall}
 \title{Get names/args/ns (and set ns) of calls lists.}
 \usage{
 call_name2(calls)
@@ -65,6 +66,8 @@ call_has_ns(x)
 call_expand(...)
 
 call_base(name, ns = NULL)
+
+encall(x)
 }
 \arguments{
 \item{calls}{a list of calls.}
