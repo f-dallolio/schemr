@@ -22,6 +22,6 @@ ns_call <- function(.ns = NULL, .fn = NULL, ...,
 #' @export
 namespaced_call <- function(.ns = NULL, .fn = NULL, ...,
                     .private = FALSE, .strict = FALSE){
-  ns_call <- function(.ns = .ns, .fn = .fn, ...,
-                      .private = .private, .strict = .strict)
+  ns_call(.ns = .ns, .fn = .fn, .private = .private, .strict = .strict)
 }
+
