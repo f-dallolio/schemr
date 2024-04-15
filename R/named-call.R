@@ -40,6 +40,13 @@ as_named_call <- function(x){
 #'
 #' @rdname named-call
 #' @export
-as_named_call_list <- function(...){
-  lapply(enexprs(...), as_named_call)
+as_named_call_list <- function(..., .named = FALSE){
+  out <- lapply(enexprs(...), as_named_call)
+  if(.named){
+    nms <- vctrs::vec_as_names(rep_len("call", length(out)), repair = "universal",
+                               quiet = TRUE)
+    setNames(out, nms)
+  } else {
+    out
+  }
 }

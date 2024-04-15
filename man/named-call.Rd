@@ -5,6 +5,7 @@
 \alias{named_call}
 \alias{named_call0}
 \alias{as_named_call}
+\alias{as_named_call_list}
 \title{Create Named (standard) Call}
 \usage{
 named_call(.fn, ..., .args = NULL, .ns = NULL, .private = FALSE)
@@ -12,6 +13,8 @@ named_call(.fn, ..., .args = NULL, .ns = NULL, .private = FALSE)
 named_call0(.fn, .args = NULL)
 
 as_named_call(x)
+
+as_named_call_list(..., .named = FALSE)
 }
 \description{
 Create Named (standard) Call
