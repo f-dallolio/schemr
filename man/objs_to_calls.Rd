@@ -6,8 +6,6 @@
 \alias{check_obj_is_call}
 \alias{objs_are_call}
 \alias{check_objs_are_call}
-\alias{obj_as_call}
-\alias{objs_as_call}
 \title{Inputs as calls}
 \usage{
 obj_is_call(x)
@@ -17,10 +15,6 @@ check_obj_is_call(x)
 objs_are_call(..., all = TRUE)
 
 check_objs_are_call(...)
-
-obj_as_call(x)
-
-objs_as_call(..., .named = FALSE)
 }
 \arguments{
 \item{x}{expression or character vector to test as call or transform to call.}

@@ -37,3 +37,9 @@ as_named_call <- function(x){
     out
   }
 }
+#'
+#' @rdname named-call
+#' @export
+as_named_call_list <- function(...){
+  lapply(enexprs(...), as_named_call)
+}
